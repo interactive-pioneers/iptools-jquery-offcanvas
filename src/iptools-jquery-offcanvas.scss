@@ -1,0 +1,64 @@
+$offcanvasScale: 150px;
+$offcanvasEasing: cubic-bezier(0.645, 0.045, 0.355, 1); // ease-in-out-cubic
+$offcanvasDuration: 800ms;
+
+.offcanvas {
+  position: fixed;
+
+  display: none;
+  transform: translate3d(0, 0, 0);
+
+  transition: transform $offcanvasDuration $offcanvasEasing;
+
+  &--top {
+    top: $offcanvasScale * -1;
+    left: 0;
+
+    width: 100vw;
+    height: $offcanvasScale;
+
+    &--active {
+      transform: translate3d(0, $offcanvasScale, 0);
+    }
+  }
+
+  &--right {
+    top: 0;
+    right: $offcanvasScale * -1;
+
+    width: $offcanvasScale;
+    height: 100vh;
+
+    &--active {
+      transform: translate3d(- $offcanvasScale, 0, 0);
+    }
+  }
+
+  &--bottom {
+    bottom: $offcanvasScale * -1;
+    left: 0;
+
+    width: 100vw;
+    height: $offcanvasScale;
+
+    &--active {
+      transform: translate3d(0, - $offcanvasScale, 0);
+    }
+  }
+
+  &--left {
+    top: 0;
+    left: $offcanvasScale * -1;
+
+    width: $offcanvasScale;
+    height: 100vh;
+
+    &--active {
+      transform: translate3d($offcanvasScale, 0, 0);
+    }
+  }
+
+  &--initialized {
+    display: block;
+  }
+}
