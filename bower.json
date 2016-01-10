@@ -1,0 +1,27 @@
+{
+  "name": "iptools-jquery-offcanvas",
+  "description": "Simple CSS3 animated offcanvas",
+  "main": "dist/iptools-jquery-offcanvas.min.js",
+  "version": "0.0.1",
+  "license": "GPL-3.0",
+  "ignore": [
+    ".git*",
+    "test/",
+    "**/.*",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "mocha": "~2.2.5",
+    "chai": "~3.0.0"
+  },
+  "authors": [
+    "Interactive Pioneers GmbH <hello@interactive-pioneers.de>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/interactive-pioneers/iptools-jquery-offcanvas.git"
+  }
+}
