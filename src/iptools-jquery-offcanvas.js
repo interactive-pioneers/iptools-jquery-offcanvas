@@ -61,7 +61,13 @@
   }
 
   IPTOffCanvas.prototype.toggle = function(add) {
-    this.$element.toggleClass(this.settings.baseClass + types[this.settings.type].activeClass, add);
+    var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
+
+    if (typeof add === 'undefined') {
+      this.$element.toggleClass(activeTypeClass);
+    } else {
+      this.$element.toggleClass(activeTypeClass, add);
+    }
   };
 
   IPTOffCanvas.prototype.destroy = function() {
