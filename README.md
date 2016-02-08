@@ -31,6 +31,7 @@ See inline comments in [Example](#example). All options are optional.
 <script type="text/javascript">
   $(document).ready(function() {
     $('#custom').iptOffCanvas({
+      baseClass: 'offcanvas',
       type: 'left' // top, right, bottom, left.
     });
   });
@@ -58,7 +59,7 @@ See inline comments in [Example](#example). All options are optional.
 
 Following tasks are there to help with development:
 
-- `grunt watch:bdd` listens to tests and source, reruns tests
+- `grunt watch` listens to source, live reloads browser 
 - `grunt qa` run QA task that includes tests and JSHint
 - `grunt build` minify source to dist/
 
