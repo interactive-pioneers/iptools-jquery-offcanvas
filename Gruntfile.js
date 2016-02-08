@@ -94,10 +94,10 @@ module.exports = function(grunt) {
       }
     },
     sass: {
-      options: {
-        sourceMap: false
-      },
       dist: {
+        options: {
+          outputStyle: 'compressed'
+        },
         files: {
           '<%= yeoman.dist %>/iptools-jquery-offcanvas.css' : '<%= yeoman.src %>/iptools-jquery-offcanvas.scss'
         }
