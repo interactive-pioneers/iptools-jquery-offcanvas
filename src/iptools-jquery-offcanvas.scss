@@ -1,9 +1,10 @@
-$offcanvasScale: 150px;
-$offcanvasEasing: cubic-bezier(0.645, 0.045, 0.355, 1); // ease-in-out-cubic
-$offcanvasDuration: 800ms;
+$offcanvasScale: 360px !default;
+$offcanvasEasing: cubic-bezier(0.645, 0.045, 0.355, 1) !default; // ease-in-out-cubic
+$offcanvasDuration: 800ms !default;
 
 .offcanvas {
   position: fixed;
+  z-index: 1000;
 
   display: none;
   transform: translate3d(0, 0, 0);

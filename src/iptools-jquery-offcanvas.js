@@ -4,39 +4,40 @@
 
   var pluginName = 'iptOffCanvas';
 
-  var baseClass = 'offcanvas';
-  var classes = {
-    open: baseClass + '__trigger--open',
-    close: baseClass + '__trigger--close',
-    content: baseClass + '__content',
-    initialized: baseClass + '--initialized'
-  };
-
   var dataAttr = {
     rel: 'rel'
   };
 
   var defaults = {
+    baseClass: 'offcanvas',
     type: 'left'
   };
 
   var types = {
     top: {
-      baseClass: baseClass + '--top',
-      activeClass: baseClass + '--top--active'
+      baseClass: '--top',
+      activeClass: '--top--active'
     },
     right: {
-      baseClass: baseClass + '--right',
-      activeClass: baseClass + '--right--active'
+      baseClass: '--right',
+      activeClass: '--right--active'
     },
     bottom: {
-      baseClass: baseClass + '--bottom',
-      activeClass: baseClass + '--bottom--active'
+      baseClass: '--bottom',
+      activeClass: '--bottom--active'
     },
     left: {
-      baseClass: baseClass + '--left',
-      activeClass: baseClass + '--left--active'
+      baseClass: '--left',
+      activeClass: '--left--active'
     },
+  };
+
+  var baseClass = 'offcanvas';
+  var classes = {
+    open: '__trigger--open',
+    close: '__trigger--close',
+    content: '__content',
+    initialized: '--initialized'
   };
 
   function IPTOffCanvas(element, options) {
@@ -60,7 +61,7 @@
   }
 
   IPTOffCanvas.prototype.toggle = function(add) {
-    this.$element.toggleClass(types[this.settings.type].activeClass, add);
+    this.$element.toggleClass(this.settings.baseClass + types[this.settings.type].activeClass, add);
   };
 
   IPTOffCanvas.prototype.destroy = function() {
@@ -70,7 +71,7 @@
   };
 
   function initialize(event) {
-    event.data.$element.addClass(classes.initialized);
+    event.data.$element.addClass(baseClass + classes.initialized);
   }
 
   function open(event) {
@@ -82,11 +83,11 @@
   }
 
   function setTypeCssClasses(instance) {
-    instance.$element.addClass(types[instance.settings.type].baseClass);
+    instance.$element.addClass(instance.settings.baseClass + types[instance.settings.type].baseClass);
   }
 
   function selectorFromClass(className) {
-    return '.' + className;
+    return '.' + baseClass + className;
   }
 
   function getNamespacedEvent(event) {
