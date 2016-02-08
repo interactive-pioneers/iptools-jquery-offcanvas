@@ -1,4 +1,4 @@
-# iptools-jquery-offcanvas [![Build Status](http://img.shields.io/travis/interactive-pioneers/iptools-jquery-offcanvas.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas) [![Bower version](https://badge.fury.io/bo/iptools-jquery-offcanvas.svg)](http://badge.fury.io/bo/iptools-jquery-offcanvas)
+# iptools-jquery-offcanvas [![Build Status](https://api.travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas) [![Bower version](https://badge.fury.io/bo/iptools-jquery-offcanvas.svg)](http://badge.fury.io/bo/iptools-jquery-offcanvas)
 
 Simple CSS3 animated offcanvas.
 
@@ -59,7 +59,7 @@ See inline comments in [Example](#example). All options are optional.
 
 Following tasks are there to help with development:
 
-- `grunt watch` listens to source, live reloads browser 
+- `grunt watch` listens to source, live reloads browser
 - `grunt qa` run QA task that includes tests and JSHint
 - `grunt build` minify source to dist/
 
