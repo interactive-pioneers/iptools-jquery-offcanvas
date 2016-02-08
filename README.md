@@ -1,6 +1,6 @@
 # iptools-jquery-offcanvas [![Build Status](http://img.shields.io/travis/interactive-pioneers/iptools-jquery-offcanvas.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas) [![Bower version](https://badge.fury.io/bo/iptools-jquery-offcanvas.svg)](http://badge.fury.io/bo/iptools-jquery-offcanvas)
 
-Simple CSS3 animated offcanvas
+Simple CSS3 animated offcanvas.
 
 ## Features
 
@@ -27,7 +27,7 @@ See inline comments in [Example](#example). All options are optional.
 </section>
 
 <link rel="stylesheet" href="dist/iptools-jquery-offcanvas.css" type="text/css">
-<script src="dist/iptools-jquery-offcanvas.js"></script>
+<script src="dist/iptools-jquery-offcanvas.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#custom').iptOffCanvas({
