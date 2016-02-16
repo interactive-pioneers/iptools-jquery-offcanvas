@@ -33,6 +33,7 @@ See inline comments in [Example](#example). All options are optional.
     $('#custom').iptOffCanvas({
       baseClass: 'offcanvas',
       type: 'left' // top, right, bottom, left.
+      single: true // close other instances when one opens
     });
   });
 </script>
