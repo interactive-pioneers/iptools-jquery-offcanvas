@@ -12,7 +12,8 @@
 
   var defaults = {
     baseClass: 'offcanvas',
-    type: 'left'
+    type: 'left',
+    single: true
   };
 
   var types = {
@@ -66,15 +67,22 @@
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
 
     if (typeof add === 'undefined') {
-      this.$element.toggleClass(activeTypeClass);
-    } else {
-      this.$element.toggleClass(activeTypeClass, add);
+      add = !this.$element.hasClass(activeTypeClass);
     }
+
+    if (this.settings.single && add) {
+      $(selectorFromClass(classes.initialized)).trigger(getNamespacedEvent('close'));
+    }
+
+    this.$element.toggleClass(activeTypeClass, add);
   };
 
   IPTOffCanvas.prototype.destroy = function() {
     this.$open.off(getNamespacedEvent('click'));
     this.$close.off(getNamespacedEvent('click'));
+    this.$element.off(getNamespacedEvent('initialized'));
+    this.$element.off(getNamespacedEvent('open'));
+    this.$element.off(getNamespacedEvent('close'));
     this.$element.removeData('plugin_' + pluginName);
   };
 
@@ -116,6 +124,8 @@
 
   function addEventListeners(instance) {
     instance.$element.on(getNamespacedEvent('initialized'), null, instance, initialize);
+    instance.$element.on(getNamespacedEvent('open'), null, instance, open);
+    instance.$element.on(getNamespacedEvent('close'), null, instance, close);
     instance.$open.on(getNamespacedEvent('click'), null, instance, open);
     instance.$close.on(getNamespacedEvent('click'), null, instance, close);
   }
