@@ -1,3 +1,5 @@
+/*jshint -W003 */
+
 (function($) {
 
   'use strict';
