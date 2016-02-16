@@ -8,7 +8,8 @@
 
     var config = {
       baseClass: 'offcanvas',
-      type: 'right'
+      type: 'right',
+      single: false
     };
 
     var pluginName = 'plugin_iptOffCanvas';
