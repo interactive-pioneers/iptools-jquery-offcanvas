@@ -96,10 +96,14 @@
 
   function open(event) {
     event.data.toggle(true, event);
+
+    event.stopPropagation();
   }
 
   function close(event) {
     event.data.toggle(false, event);
+
+    event.stopPropagation();
   }
 
   function setTypeCssClasses(instance) {
