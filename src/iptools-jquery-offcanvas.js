@@ -63,7 +63,7 @@
     this.$element.trigger(getNamespacedEvent('initialized'));
   }
 
-  IPTOffCanvas.prototype.toggle = function(add) {
+  IPTOffCanvas.prototype.toggle = function(add, event) {
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
 
     if (typeof add === 'undefined') {
@@ -72,6 +72,10 @@
 
     if (this.settings.single && add) {
       $(selectorFromClass(classes.initialized)).trigger(getNamespacedEvent('close'));
+    }
+
+    if (add) {
+      this.$element.trigger(getNamespacedEvent('opened'), event);
     }
 
     this.$element.toggleClass(activeTypeClass, add);
@@ -91,11 +95,11 @@
   }
 
   function open(event) {
-    event.data.toggle(true);
+    event.data.toggle(true, event);
   }
 
   function close(event) {
-    event.data.toggle(false);
+    event.data.toggle(false, event);
   }
 
   function setTypeCssClasses(instance) {
