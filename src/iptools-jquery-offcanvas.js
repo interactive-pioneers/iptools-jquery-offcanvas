@@ -13,7 +13,8 @@
   var defaults = {
     baseClass: 'offcanvas',
     type: 'left',
-    single: true
+    single: true,
+    static: false
   };
 
   var types = {
@@ -71,7 +72,11 @@
     }
 
     if (this.settings.single && add) {
-      $(selectorFromClass(classes.initialized)).trigger(getNamespacedEvent('close'));
+      $(selectorFromClass(classes.initialized)).each(function() {
+        if (!$(this).data('plugin_' + pluginName).settings.static) {
+          $(this).trigger(getNamespacedEvent('close'));
+        }
+      });
     }
 
     if (add) {
@@ -91,7 +96,13 @@
   };
 
   function initialize(event) {
-    event.data.$element.addClass(baseClass + classes.initialized);
+    var self = event.data;
+
+    if (self.settings.static) {
+      self.toggle(true);
+    }
+
+    self.$element.addClass(baseClass + classes.initialized);
   }
 
   function open(event) {
