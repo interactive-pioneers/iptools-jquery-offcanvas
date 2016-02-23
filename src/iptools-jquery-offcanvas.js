@@ -79,9 +79,7 @@
       });
     }
 
-    if (add) {
-      this.$element.trigger(getNamespacedEvent('opened'), event);
-    }
+    this.$element.trigger(getNamespacedEvent(add ? 'opened' : 'closed'), event);
 
     this.$element.toggleClass(activeTypeClass, add);
   };
