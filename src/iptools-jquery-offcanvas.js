@@ -69,12 +69,16 @@
     this.$element.trigger(getNamespacedEvent('initialized'));
   }
 
+  IPTOffCanvas.prototype.isActive = function() {
+    return this.$element.hasClass(this.settings.baseClass + types[this.settings.type].activeClass);
+  };
+
   IPTOffCanvas.prototype.toggle = function(add, event) {
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
     var offcanvasInstance;
 
     if (typeof add === 'undefined') {
-      add = !this.$element.hasClass(activeTypeClass);
+      add = !this.isActive();
     }
 
     if (this.settings.single && add) {
@@ -86,7 +90,16 @@
       });
     }
 
-    this.$element.trigger(getNamespacedEvent(add ? 'opened' : 'closed'), event);
+    // trigger opened closed events for instance
+    var _event = '';
+    if (add && !this.isActive()) {
+      _event = 'opened';
+    } else if (!add && this.isActive()) {
+      _event = 'closed';
+    }
+    if (_event !== '') {
+      this.$element.trigger(getNamespacedEvent(_event), event);
+    }
 
     this.$element.toggleClass(activeTypeClass, add);
   };
