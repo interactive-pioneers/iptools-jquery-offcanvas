@@ -10,11 +10,16 @@
     rel: 'rel'
   };
 
+  var noop = function() {
+    return true;
+  };
+
   var defaults = {
     baseClass: 'offcanvas',
     type: 'right',
     single: true,
-    static: false
+    static: false,
+    staticCondition: noop
   };
 
   var types = {
@@ -66,6 +71,7 @@
 
   IPTOffCanvas.prototype.toggle = function(add, event) {
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
+    var offcanvasInstance;
 
     if (typeof add === 'undefined') {
       add = !this.$element.hasClass(activeTypeClass);
@@ -73,7 +79,8 @@
 
     if (this.settings.single && add) {
       $(selectorFromClass(classes.initialized)).each(function() {
-        if (!$(this).data('plugin_' + pluginName).settings.static) {
+        offcanvasInstance = $(this).data('plugin_' + pluginName);
+        if (!(offcanvasInstance.settings.static && offcanvasInstance.settings.staticCondition())) {
           $(this).trigger(getNamespacedEvent('close'));
         }
       });
