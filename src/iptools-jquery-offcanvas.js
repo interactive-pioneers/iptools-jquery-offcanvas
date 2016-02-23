@@ -12,7 +12,7 @@
 
   var defaults = {
     baseClass: 'offcanvas',
-    type: 'left',
+    type: 'right',
     single: true,
     static: false
   };
