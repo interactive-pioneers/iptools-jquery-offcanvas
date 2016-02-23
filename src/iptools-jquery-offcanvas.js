@@ -87,10 +87,11 @@
   IPTOffCanvas.prototype.destroy = function() {
     this.$open.off(getNamespacedEvent('click'));
     this.$close.off(getNamespacedEvent('click'));
-    this.$element.off(getNamespacedEvent('initialized'));
-    this.$element.off(getNamespacedEvent('open'));
-    this.$element.off(getNamespacedEvent('close'));
-    this.$element.removeData('plugin_' + pluginName);
+    this.$element
+      .off(getNamespacedEvent('initialized'))
+      .off(getNamespacedEvent('open'))
+      .off(getNamespacedEvent('close'))
+      .removeData('plugin_' + pluginName);
   };
 
   function initialize(event) {
