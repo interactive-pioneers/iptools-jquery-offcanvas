@@ -11,6 +11,14 @@ Simple CSS3 animated offcanvas.
 
 See inline comments in [Example](#example). All options are optional.
 
+## Events
+
+Namespace     | Event        | Element        | Description
+:-------------|:-------------|:---------------|:-----------
+iptOffCanvas  | initialized  | this.$element  | Emitted after initialisation took place.
+iptOffCanvas  | opened       | this.$element  | Emitted when the canvas opens.
+iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
+
 ## Requirements
 
 - jQuery 2.1.4 or greater
@@ -18,23 +26,40 @@ See inline comments in [Example](#example). All options are optional.
 ## Example
 
 ```html
+<!-- deprecated since 0.1.0
 <button class="offcanvas__trigger--open" data-rel="custom">open</button>
 <button class="offcanvas__trigger--close" data-rel="custom">close</button>
 
 <section id="custom" class="offcanvas">
   <p>offcanvas content</p>
   <button class="offcanvas__trigger--close" data-rel="custom">X</button>
+</section> -->
+
+<button data-offcanvas-open="custom">open</button>
+<button data-offcanvas-close="custom">close</button>
+
+<section id="custom" class="offcanvas">
+  <p>offcanvas content</p>
+  <button data-offcanvas-close="custom">X</button>
 </section>
 
 <link rel="stylesheet" href="dist/iptools-jquery-offcanvas.css" type="text/css">
 <script src="dist/iptools-jquery-offcanvas.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
+
+    // bind
     $('#custom').iptOffCanvas({
       baseClass: 'offcanvas',
       type: 'left' // top, right, bottom, left.
       single: true // close other instances when one opens
     });
+
+    // example event listener
+    $('#custom').on('iptOffCanvas.opened', function() {
+      console.log('canvas opened');
+    });
+
   });
 </script>
 ```
