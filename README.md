@@ -64,6 +64,8 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
 </script>
 ```
 
+http://www.jqueryscript.net/menu/Minimal-Overlaying-Off-canvas-Plugin-With-jQuery-Iptools-Offcanvas.html
+
 ## Contributions
 
 ### Bug reports, suggestions
