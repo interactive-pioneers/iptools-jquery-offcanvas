@@ -7,7 +7,8 @@
   var pluginName = 'iptOffCanvas';
 
   var dataAttr = {
-    rel: 'rel'
+    open: 'offcanvas-open',
+    close: 'offcanvas-close'
   };
 
   var noop = function() {
@@ -43,8 +44,6 @@
 
   var baseClass = 'offcanvas';
   var classes = {
-    open: '__trigger--open',
-    close: '__trigger--close',
     content: '__content',
     initialized: '--initialized'
   };
@@ -60,8 +59,8 @@
 
     this.id = this.$element.attr('id');
 
-    this.$open = $(selectorFromClass(classes.open) + '[data-' + dataAttr.rel + '="' + this.id + '"]');
-    this.$close = $(selectorFromClass(classes.close) + '[data-' + dataAttr.rel + '="' + this.id + '"]');
+    this.$open = $('[data-' + dataAttr.open + '="' + this.id + '"]');
+    this.$close = $('[data-' + dataAttr.close + '="' + this.id + '"]');
 
     setTypeCssClasses(this);
     addEventListeners(this);
@@ -105,13 +104,9 @@
   };
 
   IPTOffCanvas.prototype.destroy = function() {
-    this.$open.off(getNamespacedEvent('click'));
-    this.$close.off(getNamespacedEvent('click'));
-    this.$element
-      .off(getNamespacedEvent('initialized'))
-      .off(getNamespacedEvent('open'))
-      .off(getNamespacedEvent('close'))
-      .removeData('plugin_' + pluginName);
+    this.$open.off('.' + pluginName);
+    this.$close.off('.' + pluginName);
+    this.$element.off('.' + pluginName).removeData('plugin_' + pluginName);
   };
 
   function initialize(event) {
