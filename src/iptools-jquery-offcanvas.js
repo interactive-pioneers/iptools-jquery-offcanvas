@@ -186,12 +186,17 @@
   }
 
   function addEventListeners(instance) {
-    instance.$element.on(getNamespacedEvent('initialized'), null, instance, initialize);
-    instance.$element.on(getNamespacedEvent('toggle'), null, instance, toggle);
-    instance.$element.on(getNamespacedEvent('open'), null, instance, open);
-    instance.$element.on(getNamespacedEvent('close'), null, instance, close);
-    instance.$open.on(getNamespacedEvent('click'), null, instance, open);
-    instance.$close.on(getNamespacedEvent('click'), null, instance, close);
+    instance.$element
+      .on(getNamespacedEvent('initialized'), null, instance, initialize)
+      .on(getNamespacedEvent('toggle'), null, instance, toggle)
+      .on(getNamespacedEvent('open'), null, instance, open)
+      .on(getNamespacedEvent('close'), null, instance, close);
+    instance.$open
+      .on(getNamespacedEvent('click'), null, instance, open)
+      .on(getNamespacedEvent('touchstart'), null, instance, open);
+    instance.$close
+      .on(getNamespacedEvent('click'), null, instance, close)
+      .on(getNamespacedEvent('touchstart'), null, instance, close);
   }
 
   $.fn[pluginName] = function(options) {
