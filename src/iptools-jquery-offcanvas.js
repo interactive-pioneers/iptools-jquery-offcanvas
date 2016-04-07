@@ -1,6 +1,6 @@
 /*jshint -W003 */
 
-(function($) {
+(function($, window, document) {
 
   'use strict';
 
@@ -17,6 +17,7 @@
 
   var defaults = {
     baseClass: 'offcanvas',
+    closeOnClickOutside: false,
     single: true,
     static: false,
     staticCondition: noop,
@@ -93,8 +94,10 @@
     var eventName = '';
     if (open && !this.isActive()) {
       eventName = 'opened';
+      bindCloseOnClickOutsideEvents(this);
     } else if (!open && this.isActive()) {
       eventName = 'closed';
+      unbindCloseOnClickOutsideEvents();
     }
     if (eventName !== '') {
       this.$element.trigger(getNamespacedEvent(eventName), originalEvent);
@@ -139,6 +142,25 @@
     event.stopPropagation();
   }
 
+  function bindCloseOnClickOutsideEvents(instance) {
+    if (instance.settings.closeOnClickOutside) {
+      $(document)
+        .on(getNamespacedEvent('click'), null, instance, handleDocumentClick)
+        .on(getNamespacedEvent('touchstart'), null, instance, handleDocumentClick);
+    }
+  }
+
+  function unbindCloseOnClickOutsideEvents() {
+    $(document).off('.' + pluginName);
+  }
+
+  function handleDocumentClick(event) {
+    var self = event.data;
+    if (!self.$element.is(event.target) && self.$element.has(event.target).length === 0) {
+      self.toggle(event, false);
+    }
+  }
+
   function setTypeCssClasses(instance) {
     instance.$element.addClass(instance.settings.baseClass + types[instance.settings.type].baseClass);
   }
@@ -181,4 +203,4 @@
 
   };
 
-})(jQuery);
+})(jQuery, window, document);
