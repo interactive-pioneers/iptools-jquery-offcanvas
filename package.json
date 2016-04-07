@@ -1,6 +1,6 @@
 {
   "name": "iptools-jquery-offcanvas",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple CSS3 animated offcanvas",
   "homepage": "https://github.com/interactive-pioneers/iptools-jquery-offcanvas",
   "author": {
@@ -11,6 +11,10 @@
     {
       "name": "Georg Meyer",
       "email": "gm@interactive-pioneers.de"
+    },
+    {
+      "name": "David Lehnen",
+      "email": "dl@interactive-pioneers.de"
     }
   ],
   "license": "GPL-3.0",
