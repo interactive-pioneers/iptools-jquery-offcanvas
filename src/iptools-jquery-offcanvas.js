@@ -97,7 +97,7 @@
       bindCloseOnClickOutsideEvents(this);
     } else if (!open && this.isActive()) {
       eventName = 'closed';
-      unbindCloseOnClickOutsideEvents();
+      unbindCloseOnClickOutsideEvents(this);
     }
     if (eventName !== '') {
       this.$element.trigger(getNamespacedEvent(eventName), originalEvent);
@@ -143,15 +143,17 @@
   }
 
   function bindCloseOnClickOutsideEvents(instance) {
-    if (instance.settings.closeOnClickOutside) {
+    if (instance.settings.closeOnClickOutside && !instance.settings.static) {
       $(document)
-        .on(getNamespacedEvent('click'), null, instance, handleDocumentClick)
-        .on(getNamespacedEvent('touchstart'), null, instance, handleDocumentClick);
+        .on(getNamespacedEvent('click', instance.id), null, instance, handleDocumentClick)
+        .on(getNamespacedEvent('touchstart', instance.id), null, instance, handleDocumentClick);
     }
   }
 
-  function unbindCloseOnClickOutsideEvents() {
-    $(document).off('.' + pluginName);
+  function unbindCloseOnClickOutsideEvents(instance) {
+    $(document)
+      .off(getNamespacedEvent('click', instance.id))
+      .off(getNamespacedEvent('touchstart', instance.id));
   }
 
   function handleDocumentClick(event) {
@@ -169,8 +171,12 @@
     return '.' + baseClass + className;
   }
 
-  function getNamespacedEvent(event) {
-    return event + '.' + pluginName;
+  function getNamespacedEvent(eventType, id) {
+    if (typeof id === 'undefined') {
+      return eventType + '.' + pluginName;
+    } else {
+      return eventType + '.' +  id + '@' + pluginName;
+    }
   }
 
   function validateInstance(instance) {
