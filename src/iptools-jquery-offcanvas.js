@@ -1,6 +1,6 @@
 /*jshint -W003 */
 
-(function($) {
+(function($, window, document) {
 
   'use strict';
 
@@ -17,10 +17,11 @@
 
   var defaults = {
     baseClass: 'offcanvas',
-    type: 'right',
+    closeOnClickOutside: false,
     single: true,
     static: false,
-    staticCondition: noop
+    staticCondition: noop,
+    type: 'right'
   };
 
   var types = {
@@ -72,15 +73,15 @@
     return this.$element.hasClass(this.settings.baseClass + types[this.settings.type].activeClass);
   };
 
-  IPTOffCanvas.prototype.toggle = function(add, event) {
+  IPTOffCanvas.prototype.toggle = function(originalEvent, open) {
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
     var offcanvasInstance;
 
-    if (typeof add === 'undefined') {
-      add = !this.isActive();
+    if (typeof open === 'undefined') {
+      open = !this.isActive();
     }
 
-    if (this.settings.single && add) {
+    if (this.settings.single && open) {
       $(selectorFromClass(classes.initialized)).each(function() {
         offcanvasInstance = $(this).data('plugin_' + pluginName);
         if (!(offcanvasInstance.settings.static && offcanvasInstance.settings.staticCondition())) {
@@ -90,23 +91,27 @@
     }
 
     // trigger opened closed events for instance
-    var _event = '';
-    if (add && !this.isActive()) {
-      _event = 'opened';
-    } else if (!add && this.isActive()) {
-      _event = 'closed';
+    var eventName = '';
+    if (open && !this.isActive()) {
+      eventName = 'opened';
+      bindCloseOnClickOutsideEvents(this);
+    } else if (!open && this.isActive()) {
+      eventName = 'closed';
+      unbindCloseOnClickOutsideEvents(this);
     }
-    if (_event !== '') {
-      this.$element.trigger(getNamespacedEvent(_event), event);
+    if (eventName !== '') {
+      this.$element.trigger(getNamespacedEvent(eventName), originalEvent);
     }
 
-    this.$element.toggleClass(activeTypeClass, add);
+    this.$element.toggleClass(activeTypeClass, open);
   };
 
   IPTOffCanvas.prototype.destroy = function() {
     this.$open.off('.' + pluginName);
     this.$close.off('.' + pluginName);
-    this.$element.off('.' + pluginName).removeData('plugin_' + pluginName);
+    this.$element
+      .off('.' + pluginName)
+      .removeData('plugin_' + pluginName);
   };
 
   function initialize(event) {
@@ -119,16 +124,43 @@
     self.$element.addClass(baseClass + classes.initialized);
   }
 
+  function toggle(event) {
+    event.data.toggle(event);
+
+    event.stopPropagation();
+  }
+
   function open(event) {
-    event.data.toggle(true, event);
+    event.data.toggle(event, true);
 
     event.stopPropagation();
   }
 
   function close(event) {
-    event.data.toggle(false, event);
+    event.data.toggle(event, false);
 
     event.stopPropagation();
+  }
+
+  function bindCloseOnClickOutsideEvents(instance) {
+    if (instance.settings.closeOnClickOutside && !instance.settings.static) {
+      $(document)
+        .on(getNamespacedEvent('click', instance.id), null, instance, handleDocumentClick)
+        .on(getNamespacedEvent('touchstart', instance.id), null, instance, handleDocumentClick);
+    }
+  }
+
+  function unbindCloseOnClickOutsideEvents(instance) {
+    $(document)
+      .off(getNamespacedEvent('click', instance.id))
+      .off(getNamespacedEvent('touchstart', instance.id));
+  }
+
+  function handleDocumentClick(event) {
+    var self = event.data;
+    if (!self.$element.is(event.target) && self.$element.has(event.target).length === 0) {
+      self.toggle(event, false);
+    }
   }
 
   function setTypeCssClasses(instance) {
@@ -139,8 +171,12 @@
     return '.' + baseClass + className;
   }
 
-  function getNamespacedEvent(event) {
-    return event + '.' + pluginName;
+  function getNamespacedEvent(eventType, id) {
+    if (typeof id === 'undefined') {
+      return eventType + '.' + pluginName;
+    } else {
+      return eventType + '.' +  id + '@' + pluginName;
+    }
   }
 
   function validateInstance(instance) {
@@ -156,11 +192,17 @@
   }
 
   function addEventListeners(instance) {
-    instance.$element.on(getNamespacedEvent('initialized'), null, instance, initialize);
-    instance.$element.on(getNamespacedEvent('open'), null, instance, open);
-    instance.$element.on(getNamespacedEvent('close'), null, instance, close);
-    instance.$open.on(getNamespacedEvent('click'), null, instance, open);
-    instance.$close.on(getNamespacedEvent('click'), null, instance, close);
+    instance.$element
+      .on(getNamespacedEvent('initialized'), null, instance, initialize)
+      .on(getNamespacedEvent('toggle'), null, instance, toggle)
+      .on(getNamespacedEvent('open'), null, instance, open)
+      .on(getNamespacedEvent('close'), null, instance, close);
+    instance.$open
+      .on(getNamespacedEvent('click'), null, instance, open)
+      .on(getNamespacedEvent('touchstart'), null, instance, open);
+    instance.$close
+      .on(getNamespacedEvent('click'), null, instance, close)
+      .on(getNamespacedEvent('touchstart'), null, instance, close);
   }
 
   $.fn[pluginName] = function(options) {
@@ -172,4 +214,4 @@
 
   };
 
-})(jQuery);
+})(jQuery, window, document);
