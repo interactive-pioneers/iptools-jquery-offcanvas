@@ -17,5 +17,6 @@
   "trailing": true,
   "smarttabs": true,
   "jquery": true,
-  "mocha": true
+  "mocha": true,
+  "predef": ["expect"]
 }
