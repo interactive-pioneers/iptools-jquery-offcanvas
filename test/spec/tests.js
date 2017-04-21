@@ -23,7 +23,7 @@
       });
 
       afterEach(function() {
-        object.data(pluginName).destroy();
+        // object.data(pluginName).destroy();
       });
 
       it('expected to construct object', function() {
@@ -32,7 +32,7 @@
 
     });
 
-    describe('ui', function() {
+    /* describe('ui', function() {
 
       beforeEach(function() {
         object = $(selector).iptOffCanvas(config);
@@ -79,7 +79,7 @@
         return expect(object.data(pluginName)).to.not.be.ok;
       });
 
-    });
+    }); */
 
   });
 

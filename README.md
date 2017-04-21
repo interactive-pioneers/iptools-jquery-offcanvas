@@ -4,7 +4,9 @@ Simple CSS3 animated offcanvas.
 
 ## Features
 
-- Display content inside offcanvas from the top, right, bottom or left.
+- Displays content inside an offcanvas from the top, right, bottom or left.
+- Multiple instances at once.
+- Static, instance is open on page load.
 - CSS3 transitions and animations.
 
 ## Options
@@ -77,10 +79,11 @@ http://www.jqueryscript.net/menu/Minimal-Overlaying-Off-canvas-Plugin-With-jQuer
 
 1. Fork it ( https://github.com/[my-github-username]/iptools-jquery-offcanvas/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Develop your feature by concepts of [TDD](http://en.wikipedia.org/wiki/Test-driven_development), see [Tips](#tips)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+3. Install dependencies (`npm i`)
+4. Develop your feature by concepts of [TDD](http://en.wikipedia.org/wiki/Test-driven_development), see [Tips](#tips)
+5. Commit your changes (`git commit -am 'Add some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create a new Pull Request
 
 ### Tips
 

@@ -11,7 +11,7 @@
     close: 'offcanvas-close'
   };
 
-  var noop = function() {
+  var alwaysTrue = function() {
     return true;
   };
 
@@ -20,7 +20,7 @@
     closeOnClickOutside: false,
     single: true,
     static: false,
-    staticCondition: noop,
+    staticCondition: alwaysTrue,
     type: 'right'
   };
 
