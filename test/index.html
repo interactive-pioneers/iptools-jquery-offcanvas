@@ -3,27 +3,29 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Mocha Spec Runner</title>
-  <link rel="stylesheet" href="../bower_components/mocha/mocha.css">
+  <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
   <link rel="stylesheet" href="../dist/iptools-jquery-offcanvas.css">
 </head>
 <body>
   <div id="mocha"></div>
 
-  <button class="offcanvas__trigger--open" data-rel="custom">open</button>
-  <button class="offcanvas__trigger--close" data-rel="custom">close</button>
+  <button data-offcanvas-open="custom">open</button>
+  <button data-offcanvas-close="custom">close</button>
 
   <section id="custom" class="offcanvas">
     <p>offcanvas content</p>
-    <button class="offcanvas__trigger--close" data-rel="custom">X</button>
+    <button data-offcanvas-close="custom">X</button>
   </section>
 
-  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="../bower_components/mocha/mocha.js"></script>
-  <script src="../bower_components/chai/chai.js"></script>
-  <script>mocha.setup('bdd');</script>
-  <script>var expect = chai.expect;</script>
-  <script src="../dist/iptools-jquery-offcanvas.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>
+    mocha.setup('bdd');
+    var expect = chai.expect;
+  </script>
   <script src="spec/tests.js"></script>
+  <script src="../src/iptools-jquery-offcanvas.js"></script>
   <script>
     if (navigator.userAgent.indexOf('PhantomJS') < 0) {
       mocha.run();
