@@ -11,7 +11,7 @@ Simple CSS3 animated offcanvas.
 
 All options are optional.
 
-Name                 | type     | default value               | values                                     |
+Name                 | type     | default value               | values                                     | description
 :--------------------|:---------|:----------------------------|:-------------------------------------------|:------------------
 baseClass            | string   | offcanvas                   | valid css class string                     | canvas css class
 type                 | string   | left                        | top, right, bottom, left                   | canvas position
