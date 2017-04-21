@@ -51,7 +51,7 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
     // bind
     $('#custom').iptOffCanvas({
       baseClass: 'offcanvas',
-      type: 'left' // top, right, bottom, left.
+      type: 'left', // top, right, bottom, left.
       single: true // close other instances when one opens
     });
 
