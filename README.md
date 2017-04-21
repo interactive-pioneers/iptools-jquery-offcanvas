@@ -50,6 +50,7 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
 
     // bind
     $('#custom').iptOffCanvas({
+      baseClass: 'offcanvas',
       type: 'left'
     });
 
