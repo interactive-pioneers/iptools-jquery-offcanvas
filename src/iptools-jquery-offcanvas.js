@@ -8,7 +8,8 @@
 
   var dataAttr = {
     open: 'offcanvas-open',
-    close: 'offcanvas-close'
+    close: 'offcanvas-close',
+    toggle: 'offcanvas-toggle'
   };
 
   var alwaysTrue = function() {
@@ -62,6 +63,7 @@
 
     this.$open = $('[data-' + dataAttr.open + '="' + this.id + '"]');
     this.$close = $('[data-' + dataAttr.close + '="' + this.id + '"]');
+    this.$toggle = $('[data-' + dataAttr.toggle + '="' + this.id + '"]');
 
     setTypeCssClasses(this);
     addEventListeners(this);
@@ -109,6 +111,7 @@
   IPTOffCanvas.prototype.destroy = function() {
     this.$open.off('.' + pluginName);
     this.$close.off('.' + pluginName);
+    this.$toggle.off('.' + pluginName);
     this.$element
       .off('.' + pluginName)
       .removeData('plugin_' + pluginName);
@@ -207,6 +210,9 @@
     instance.$close
       .on(getNamespacedEvent('click'), null, instance, close)
       .on(getNamespacedEvent('touchstart'), null, instance, close);
+    instance.$toggle
+        .on(getNamespacedEvent('click'), null, instance, toggle)
+        .on(getNamespacedEvent('touchstart'), null, instance, toggle);
   }
 
   $.fn[pluginName] = function(options) {
