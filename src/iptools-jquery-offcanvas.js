@@ -125,18 +125,21 @@
   }
 
   function toggle(event) {
+    console.log('toggle');
     event.data.toggle(event);
 
     event.stopPropagation();
   }
 
   function open(event) {
+    console.log('open');
     event.data.toggle(event, true);
 
     event.stopPropagation();
   }
 
   function close(event) {
+    console.log('close');
     event.data.toggle(event, false);
 
     event.stopPropagation();
@@ -192,6 +195,7 @@
   }
 
   function addEventListeners(instance) {
+    console.log('addEventListeners');
     instance.$element
       .on(getNamespacedEvent('initialized'), null, instance, initialize)
       .on(getNamespacedEvent('toggle'), null, instance, toggle)

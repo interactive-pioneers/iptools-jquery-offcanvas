@@ -1,4 +1,3 @@
-$offcanvasScale: 360px !default;
 $offcanvasEasing: cubic-bezier(0.645, 0.045, 0.355, 1) !default; // ease-in-out-cubic
 $offcanvasDuration: 800ms !default;
 
@@ -12,50 +11,46 @@ $offcanvasDuration: 800ms !default;
   transition: transform $offcanvasDuration $offcanvasEasing;
 
   &--top {
-    top: $offcanvasScale * -1;
+    bottom: 100%;
     left: 0;
 
-    width: 100vw;
-    height: $offcanvasScale;
+    width: 100%;
 
     &--active {
-      transform: translate3d(0, $offcanvasScale, 0);
+      transform: translate3d(0, 100%, 0);
     }
   }
 
   &--right {
     top: 0;
-    right: $offcanvasScale * -1;
+    left: 100%;
 
-    width: $offcanvasScale;
-    height: 100vh;
+    height: 100%;
 
     &--active {
-      transform: translate3d(- $offcanvasScale, 0, 0);
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   &--bottom {
-    bottom: $offcanvasScale * -1;
+    top: 100%;
     left: 0;
 
-    width: 100vw;
-    height: $offcanvasScale;
+    width: 100%;
 
     &--active {
-      transform: translate3d(0, - $offcanvasScale, 0);
+      transform: translate3d(0, -100%, 0);
     }
   }
 
   &--left {
     top: 0;
-    left: $offcanvasScale * -1;
+    right: 100%;
 
-    width: $offcanvasScale;
-    height: 100vh;
+    height: 100%;
 
     &--active {
-      transform: translate3d($offcanvasScale, 0, 0);
+      transform: translate3d(100%, 0, 0);
     }
   }
 

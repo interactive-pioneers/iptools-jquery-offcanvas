@@ -32,7 +32,7 @@
 
     });
 
-    describe('api', function() {
+    describe('ui', function() {
 
       beforeEach(function() {
         object = $(selector).iptOffCanvas(config);

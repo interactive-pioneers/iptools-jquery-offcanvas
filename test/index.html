@@ -13,8 +13,10 @@
   <button class="offcanvas__trigger--close" data-rel="custom">close</button>
 
   <section id="custom" class="offcanvas">
-    <p>offcanvas content</p>
-    <button class="offcanvas__trigger--close" data-rel="custom">X</button>
+    <div style="padding:50px;background-color:rgba(255,0,0,0.5);width:100%;height:100%;">
+      <p>OFFCANVAS CONTENT</p>
+      <button class="offcanvas__trigger--close" data-rel="custom">X</button>
+    </div>
   </section>
 
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -22,7 +24,7 @@
   <script src="../bower_components/chai/chai.js"></script>
   <script>mocha.setup('bdd');</script>
   <script>var expect = chai.expect;</script>
-  <script src="../dist/iptools-jquery-offcanvas.min.js"></script>
+  <script src="../src/iptools-jquery-offcanvas.js"></script>
   <script src="spec/tests.js"></script>
   <script>
     if (navigator.userAgent.indexOf('PhantomJS') < 0) {
