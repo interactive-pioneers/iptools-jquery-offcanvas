@@ -11,14 +11,14 @@ Simple CSS3 animated offcanvas.
 
 All options are optional.
 
-Name                 | type     | default value               | values                                     | description
-:--------------------|:---------|:----------------------------|:-------------------------------------------|:------------------
-baseClass            | string   | offcanvas                   | valid css class string                     | canvas css class
-type                 | string   | left                        | top, right, bottom, left                   | canvas position
-single               | boolean  | true                        |                                            |
-closeOnClickOutside  | boolean  | false                       |                                            |
-static               | boolean  | false                       |                                            | open after initialization
-staticCondition      | function | function() { return true; } | a function returning either true or false  | close condition for static canvas
+Name                 | type     | default value               | values                                     | description                        | version
+:--------------------|:---------|:----------------------------|:-------------------------------------------|:-----------------------------------|:---------
+baseClass            | string   | offcanvas                   | valid css class string                     | canvas css class                   | < 1.0.0
+type                 | string   | left                        | top, right, bottom, left                   | canvas position                    | < 1.0.0
+single               | boolean  | true                        |                                            |                                    | < 1.0.0
+closeOnClickOutside  | boolean  | false                       |                                            |                                    | < 1.0.0
+static               | boolean  | false                       |                                            | open after initialization          | >= 1.0.0
+staticCondition      | function | function() { return true; } | a function returning either true or false  | close condition for static canvas  | >= 1.0.0
 
 ## Events
 
