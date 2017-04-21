@@ -9,32 +9,32 @@ Simple CSS3 animated offcanvas.
 
 ## Options
 
-See inline comments in [Example](#example). All options are optional.
+All options are optional.
+
+Name                 | type     | default value               | values
+:--------------------|:---------|:----------------------------|:-------------------------------------------|:------------------
+baseClass            | string   | offcanvas                   | valid css class string                     | canvas css class
+type                 | string   | left                        | top, right, bottom, left                   | canvas position
+single               | boolean  | true                        |                                            |
+closeOnClickOutside  | boolean  | false                       |                                            |
+static               | boolean  | false                       |                                            | open after initialization
+staticCondition      | function | function() { return true; } | a function returning either true or false  | close condition for static canvas
 
 ## Events
 
 Namespace     | Event        | Element        | Description
 :-------------|:-------------|:---------------|:-----------
-iptOffCanvas  | initialized  | this.$element  | Emitted after initialisation took place.
+iptOffCanvas  | initialized  | this.$element  | Emitted after initialization took place.
 iptOffCanvas  | opened       | this.$element  | Emitted when the canvas opens.
 iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
 
 ## Requirements
 
-- jQuery 2.1.4 or greater
+- jQuery >=1.11.3 <4
 
 ## Example
 
 ```html
-<!-- deprecated since 0.1.0
-<button class="offcanvas__trigger--open" data-rel="custom">open</button>
-<button class="offcanvas__trigger--close" data-rel="custom">close</button>
-
-<section id="custom" class="offcanvas">
-  <p>offcanvas content</p>
-  <button class="offcanvas__trigger--close" data-rel="custom">X</button>
-</section> -->
-
 <button data-offcanvas-open="custom">open</button>
 <button data-offcanvas-close="custom">close</button>
 
@@ -50,9 +50,7 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
 
     // bind
     $('#custom').iptOffCanvas({
-      baseClass: 'offcanvas',
-      type: 'left', // top, right, bottom, left.
-      single: true // close other instances when one opens
+      type: 'left'
     });
 
     // example event listener
