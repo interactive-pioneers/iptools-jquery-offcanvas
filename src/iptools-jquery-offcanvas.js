@@ -21,7 +21,7 @@
     closeOnClickOutside: false,
     single: true,
     static: false,
-    staticCondition: alwaysTrue,
+    staticCloseCondition: alwaysTrue,
     type: 'right'
   };
 
@@ -44,9 +44,7 @@
     },
   };
 
-  var baseClass = 'offcanvas';
-  var classes = {
-    content: '__content',
+  var modifiers = {
     initialized: '--initialized'
   };
 
@@ -54,36 +52,51 @@
     this.settings = $.extend({}, defaults, options);
     this.$element = $(element);
 
-    this.id = this.$element.attr('id');
+    var id = this.$element.attr('id');
+    this.$open = $('[data-' + dataAttr.open + '="' + id + '"]');
+    this.$close = $('[data-' + dataAttr.close + '="' + id + '"]');
+    this.$toggle = $('[data-' + dataAttr.toggle + '="' + id + '"]');
 
-    this.$open = $('[data-' + dataAttr.open + '="' + this.id + '"]');
-    this.$close = $('[data-' + dataAttr.close + '="' + this.id + '"]');
-    this.$toggle = $('[data-' + dataAttr.toggle + '="' + this.id + '"]');
+    this.$element.addClass(this.settings.baseClass + types[this.settings.type].baseClass);
 
-    setTypeCssClasses(this);
     addEventListeners(this);
+    initialize(this);
 
     this.$element.trigger(getNamespacedEvent('initialized'));
   }
+
+  IPTOffCanvas.prototype.getSettings = function() {
+    return this.settings;
+  };
 
   IPTOffCanvas.prototype.isActive = function() {
     return this.$element.hasClass(this.settings.baseClass + types[this.settings.type].activeClass);
   };
 
-  IPTOffCanvas.prototype.toggle = function(originalEvent, open) {
+  IPTOffCanvas.prototype.toggle = function(open) {
     var activeTypeClass = this.settings.baseClass + types[this.settings.type].activeClass;
     var offcanvasInstance;
+    var offcanvasSettings;
+    var self = this;
 
-    if (typeof open === 'undefined') {
-      open = !this.isActive();
-    }
+    open = typeof open === 'undefined' ? !this.isActive() : open;
 
     if (this.settings.single && open) {
-      $(selectorFromClass(classes.initialized)).each(function() {
+      $(selectorFromClass(this.settings.baseClass, modifiers.initialized)).each(function() {
         offcanvasInstance = $(this).data('plugin_' + pluginName);
-        if (!(offcanvasInstance.settings.static && offcanvasInstance.settings.staticCondition())) {
-          $(this).trigger(getNamespacedEvent('close'));
+        offcanvasSettings = offcanvasInstance.getSettings();
+
+        if (
+          self.$element !== offcanvasInstance.$element &&
+          offcanvasInstance.isActive() &&
+          (
+            !offcanvasSettings.static ||
+            offcanvasSettings.static && offcanvasSettings.staticCloseCondition()
+          )
+        ) {
+          offcanvasInstance.toggle(false);
         }
+
       });
     }
 
@@ -97,7 +110,7 @@
       unbindCloseOnClickOutsideEvents(this);
     }
     if (eventName !== '') {
-      this.$element.trigger(getNamespacedEvent(eventName), originalEvent);
+      this.$element.trigger(getNamespacedEvent(eventName));
     }
 
     this.$element.toggleClass(activeTypeClass, open);
@@ -112,31 +125,26 @@
       .removeData('plugin_' + pluginName);
   };
 
-  function initialize(event) {
-    var self = event.data;
-
-    if (self.settings.static) {
-      self.toggle(true);
+  function initialize(instance) {
+    if (instance.settings.static) {
+      instance.toggle(true);
     }
 
-    self.$element.addClass(baseClass + classes.initialized);
-  }
-
-  function toggle(event) {
-    event.data.toggle(event);
-
-    event.stopPropagation();
+    instance.$element.addClass(instance.settings.baseClass + modifiers.initialized);
   }
 
   function open(event) {
-    event.data.toggle(event, true);
-
+    event.data.toggle(true);
     event.stopPropagation();
   }
 
   function close(event) {
-    event.data.toggle(event, false);
+    event.data.toggle(false);
+    event.stopPropagation();
+  }
 
+  function toggle(event) {
+    event.data.toggle();
     event.stopPropagation();
   }
 
@@ -157,15 +165,11 @@
   function handleDocumentClick(event) {
     var self = event.data;
     if (!self.$element.is(event.target) && self.$element.has(event.target).length === 0) {
-      self.toggle(event, false);
+      self.toggle(false);
     }
   }
 
-  function setTypeCssClasses(instance) {
-    instance.$element.addClass(instance.settings.baseClass + types[instance.settings.type].baseClass);
-  }
-
-  function selectorFromClass(className) {
+  function selectorFromClass(baseClass, className) {
     return '.' + baseClass + className;
   }
 
@@ -178,11 +182,6 @@
   }
 
   function addEventListeners(instance) {
-    instance.$element
-      .on(getNamespacedEvent('initialized'), null, instance, initialize)
-      .on(getNamespacedEvent('toggle'), null, instance, toggle)
-      .on(getNamespacedEvent('open'), null, instance, open)
-      .on(getNamespacedEvent('close'), null, instance, close);
     instance.$open
       .on(getNamespacedEvent('click'), null, instance, open)
       .on(getNamespacedEvent('touchstart'), null, instance, open);
