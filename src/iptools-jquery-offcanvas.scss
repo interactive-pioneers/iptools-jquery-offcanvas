@@ -10,6 +10,8 @@ $offcanvasDuration: 800ms !default;
 
   transition: transform $offcanvasDuration $offcanvasEasing;
 
+  box-sizing: border-box;
+
   &--top {
     bottom: 100%;
     left: 0;
