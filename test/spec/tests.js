@@ -8,13 +8,18 @@
 
     var config = {
       baseClass: 'offcanvas',
-      type: 'right',
-      single: false
+      closeOnClickOutside: false,
+      single: true,
+      static: false,
+      staticCloseCondition: function() { return true; },
+      type: 'right'
     };
 
     var pluginName = 'plugin_iptOffCanvas';
     var selector = '#custom';
-    var object = null;
+    var object;
+    var objectHandler;
+    var object2;
 
     describe('init', function() {
 
@@ -32,39 +37,61 @@
 
     });
 
-    /* describe('ui', function() {
+    describe('ui', function() {
 
       beforeEach(function() {
         object = $(selector).iptOffCanvas(config);
+        objectHandler = object.data(pluginName);
       });
 
       afterEach(function() {
         object.data(pluginName).destroy();
+        objectHandler = null;
       });
 
-      it('expected to add active class', function() {
-        object.data(pluginName).toggle(true);
+      it('expected object to be active', function() {
+        objectHandler.toggle(true);
 
-        return expect($(selector).hasClass('offcanvas--right--active')).to.be.ok;
+        return expect(objectHandler.isActive()).to.be.true;
       });
 
-      it('expected to remove active class', function() {
-        object.data(pluginName).toggle(false);
+      it('expected object to be not active', function() {
+        objectHandler.toggle(false);
 
-        return expect($(selector).hasClass('offcanvas--right--active')).to.be.not.ok;
+        return expect(objectHandler.isActive()).to.be.false;
       });
 
-      it('expected to toggle active class', function() {
-        var before = $(selector).hasClass('offcanvas--right--active');
-        object.data(pluginName).toggle();
-        var after = $(selector).hasClass('offcanvas--right--active');
+      it('expected object to toggle', function() {
+        var before = objectHandler.isActive();
+        objectHandler.toggle();
+        var after = objectHandler.isActive();
 
-        return expect(before !== after).to.be.ok;
+        return expect(before === after).to.be.false;
+      });
+
+      it('expected object settings', function() {
+        var settings = objectHandler.getSettings();
+
+        return expect(JSON.stringify(settings) === JSON.stringify(config)).to.be.true;
       });
 
     });
 
-    describe('destroy', function() {
+    describe('settings', function() {
+
+      // beforeEach(function() {});
+
+      afterEach(function() {
+        object.data(pluginName).destroy();
+        objectHandler = null;
+        if (object2) {
+          object2.data(pluginName).destroy();
+        }
+      });
+
+    });
+
+    /* describe('destroy', function() {
 
       beforeEach(function() {
         object = $(selector).iptOffCanvas(config);
