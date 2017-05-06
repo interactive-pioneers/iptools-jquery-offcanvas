@@ -54,11 +54,6 @@
     this.settings = $.extend({}, defaults, options);
     this.$element = $(element);
 
-    var error = validateInstance(this);
-    if (error !== '') {
-      throw new Error(pluginName + ': ' + error);
-    }
-
     this.id = this.$element.attr('id');
 
     this.$open = $('[data-' + dataAttr.open + '="' + this.id + '"]');
@@ -128,21 +123,18 @@
   }
 
   function toggle(event) {
-    console.log('toggle');
     event.data.toggle(event);
 
     event.stopPropagation();
   }
 
   function open(event) {
-    console.log('open');
     event.data.toggle(event, true);
 
     event.stopPropagation();
   }
 
   function close(event) {
-    console.log('close');
     event.data.toggle(event, false);
 
     event.stopPropagation();
@@ -185,20 +177,7 @@
     }
   }
 
-  function validateInstance(instance) {
-    // check for required id attr
-    if ($.trim(instance.$element.attr('id')) === '') {
-      return 'Required attr `id` missing on element!';
-    }
-    // check for valid type
-    if (typeof types[instance.settings.type] === 'undefined') {
-      return 'Invalid type `' + instance.settings.type + '` given!';
-    }
-    return '';
-  }
-
   function addEventListeners(instance) {
-    console.log('addEventListeners');
     instance.$element
       .on(getNamespacedEvent('initialized'), null, instance, initialize)
       .on(getNamespacedEvent('toggle'), null, instance, toggle)
