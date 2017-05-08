@@ -6,6 +6,10 @@ Simple CSS3 animated offcanvas.
 
 - [native js version](https://github.com/interactive-pioneers/iptools-offcanvas)
 
+## legacy
+
+- 0.0.2 [documentation](https://github.com/interactive-pioneers/iptools-jquery-offcanvas/tree/master/doc/0.0.2/readme.md)
+
 ## Features
 
 - Displays content inside an offcanvas from the top, right, bottom or left.
@@ -96,8 +100,6 @@ Event                             | Element        | Description
   });
 </script>
 ```
-
-http://www.jqueryscript.net/menu/Minimal-Overlaying-Off-canvas-Plugin-With-jQuery-Iptools-Offcanvas.html
 
 ## Contributions
 
