@@ -2,6 +2,10 @@
 
 Simple CSS3 animated offcanvas.
 
+## Related
+
+- [native js version](https://github.com/interactive-pioneers/iptools-offcanvas)
+
 ## Features
 
 - Displays content inside an offcanvas from the top, right, bottom or left.
@@ -13,22 +17,33 @@ Simple CSS3 animated offcanvas.
 
 All options are optional.
 
-Name                 | type     | default value               | values                                     | description                        | version
-:--------------------|:---------|:----------------------------|:-------------------------------------------|:-----------------------------------|:---------
-baseClass            | string   | offcanvas                   | valid css class string                     | canvas css class                   | < 1.0.0
-type                 | string   | left                        | top, right, bottom, left                   | canvas position                    | < 1.0.0
-single               | boolean  | true                        |                                            |                                    | < 1.0.0
-closeOnClickOutside  | boolean  | false                       |                                            |                                    | < 1.0.0
-static               | boolean  | false                       |                                            | open after initialization          | >= 1.0.0
-staticCondition      | function | function() { return true; } | a function returning either true or false  | close condition for static canvas  | >= 1.0.0
+Name                   | type       | default value                 | values                                     | description
+:----------------------|:-----------|:------------------------------|:-------------------------------------------|:-----------------------------------
+`baseClass`            | `string`   | `offcanvas`                   | valid css class string                     | base css class
+`type`                 | `string`   | `left`                        | `top`, `right`, `bottom`, `left`           | canvas position
+`single`               | `boolean`  | `true`                        |                                            | single mode, closes all other canvases
+`closeOnClickOutside`  | `boolean`  | `false`                       |                                            | close canvas on click outside
+`static`               | `boolean`  | `false`                       |                                            | open after initialization
+`staticCloseCondition` | `function` | `function() { return true; }` | a function returning either true or false  | close condition for static canvas
+
+## Methods
+
+Method        | Parameter | Return    | Description
+:-------------|:----------|:----------|:-----------
+`getSettings` |           | `object`  | retrieve settings
+`isActive`    |           | `boolean` | returns if canvas is active (open)
+`toggle`      | `boolean` |           | not required. open (true), close (false) or toggle (leave empty)
+`destroy`     |           |           | destroy offcanvas
 
 ## Events
 
-Namespace     | Event        | Element        | Description
-:-------------|:-------------|:---------------|:-----------
-iptOffCanvas  | initialized  | this.$element  | Emitted after initialization took place.
-iptOffCanvas  | opened       | this.$element  | Emitted when the canvas opens.
-iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
+Event pattern: `{eventName}.{elementId}@iptOffCanvas`
+
+Event                             | Element        | Description
+:---------------------------------|:---------------|:-----------
+`initialized.custom@iptOffCanvas` | this.$element  | Emitted when canvas is ready to use.
+`opened.custom@iptOffCanvas`      | this.$element  | Emitted when the canvas opens.
+`closed.custom@iptOffCanvas`      | this.$element  | Emitted when the canvas closes.
 
 ## Requirements
 
@@ -39,9 +54,10 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
 ```html
 <button data-offcanvas-open="custom">open</button>
 <button data-offcanvas-close="custom">close</button>
+<button data-offcanvas-toggle="custom">toggle</button>
 
-<section id="custom" class="offcanvas">
-  <p>offcanvas content</p>
+<section id="custom" class="offcanvas" style="padding:50px;background-color:rgba(0,0,0,0.5);">
+  <p>content</p>
   <button data-offcanvas-close="custom">X</button>
 </section>
 
@@ -53,8 +69,24 @@ iptOffCanvas  | closed       | this.$element  | Emitted when the canvas closes.
     // bind
     $('#custom').iptOffCanvas({
       baseClass: 'offcanvas',
-      type: 'left'
+      closeOnClickOutside: false,
+      single: true,
+      static: false,
+      staticCloseCondition: function() { return true; },
+      type: 'right'
     });
+
+    // retrieve settings
+    var settings = $('#custom').data(pluginName).getSettings();
+
+    // check if active (open)
+    var isActive = $('#custom').data(pluginName).isActive();
+
+    // open, close or toggle
+    $('#custom').data(pluginName).toggle(true); // true for open, false to close, leave empty to toggle
+
+    // destroy canvas
+    $('#custom').data(pluginName).destroy();
 
     // example event listener
     $('#custom').on('iptOffCanvas.opened', function() {
