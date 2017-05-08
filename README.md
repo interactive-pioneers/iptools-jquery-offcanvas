@@ -93,7 +93,7 @@ Event                             | Element        | Description
     $('#custom').data(pluginName).destroy();
 
     // example event listener
-    $('#custom').on('iptOffCanvas.opened', function() {
+    $('#custom').on('opened.custom@iptOffCanvas', function() {
       console.log('canvas opened');
     });
 
