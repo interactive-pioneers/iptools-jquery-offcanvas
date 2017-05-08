@@ -52,17 +52,17 @@
     this.settings = $.extend({}, defaults, options);
     this.$element = $(element);
 
-    var id = this.$element.attr('id');
-    this.$open = $('[data-' + dataAttr.open + '="' + id + '"]');
-    this.$close = $('[data-' + dataAttr.close + '="' + id + '"]');
-    this.$toggle = $('[data-' + dataAttr.toggle + '="' + id + '"]');
+    this.id = this.$element.attr('id');
+    this.$open = $('[data-' + dataAttr.open + '="' + this.id + '"]');
+    this.$close = $('[data-' + dataAttr.close + '="' + this.id + '"]');
+    this.$toggle = $('[data-' + dataAttr.toggle + '="' + this.id + '"]');
 
     this.$element.addClass(this.settings.baseClass + types[this.settings.type].baseClass);
 
     addEventListeners(this);
     initialize(this);
 
-    this.$element.trigger(getNamespacedEvent('initialized'));
+    this.$element.trigger(getNamespacedEvent('initialized', this.id));
   }
 
   IPTOffCanvas.prototype.getSettings = function() {
@@ -83,6 +83,7 @@
 
     if (this.settings.single && open) {
       $(selectorFromClass(this.settings.baseClass, modifiers.initialized)).each(function() {
+
         offcanvasInstance = $(this).data('plugin_' + pluginName);
         offcanvasSettings = offcanvasInstance.getSettings();
 
@@ -110,7 +111,7 @@
       unbindCloseOnClickOutsideEvents(this);
     }
     if (eventName !== '') {
-      this.$element.trigger(getNamespacedEvent(eventName));
+      this.$element.trigger(getNamespacedEvent(eventName, this.id));
     }
 
     this.$element.toggleClass(activeTypeClass, open);
@@ -121,7 +122,8 @@
     this.$close.off('.' + pluginName);
     this.$toggle.off('.' + pluginName);
     this.$element
-      .off('.' + pluginName)
+      .removeClass(this.settings.baseClass + modifiers.initialized)
+      .removeClass(this.settings.baseClass + types[this.settings.type].activeClass)
       .removeData('plugin_' + pluginName);
   };
 
@@ -183,14 +185,14 @@
 
   function addEventListeners(instance) {
     instance.$open
-      .on(getNamespacedEvent('click'), null, instance, open)
-      .on(getNamespacedEvent('touchstart'), null, instance, open);
+      .on(getNamespacedEvent('click', instance.id), null, instance, open)
+      .on(getNamespacedEvent('touchstart', instance.id), null, instance, open);
     instance.$close
-      .on(getNamespacedEvent('click'), null, instance, close)
-      .on(getNamespacedEvent('touchstart'), null, instance, close);
+      .on(getNamespacedEvent('click', instance.id), null, instance, close)
+      .on(getNamespacedEvent('touchstart', instance.id), null, instance, close);
     instance.$toggle
-        .on(getNamespacedEvent('click'), null, instance, toggle)
-        .on(getNamespacedEvent('touchstart'), null, instance, toggle);
+        .on(getNamespacedEvent('click', instance.id), null, instance, toggle)
+        .on(getNamespacedEvent('touchstart', instance.id), null, instance, toggle);
   }
 
   $.fn[pluginName] = function(options) {
