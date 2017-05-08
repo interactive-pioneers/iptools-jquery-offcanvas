@@ -1,6 +1,6 @@
 {
   "name": "iptools-jquery-offcanvas",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Simple CSS3 animated offcanvas",
   "homepage": "https://github.com/interactive-pioneers/iptools-jquery-offcanvas",
   "author": {
@@ -25,17 +25,17 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-concurrent": "~2.3.1",
-    "grunt-contrib-clean": "~1.0.0",
+    "grunt-contrib-clean": "~1.1.0",
     "grunt-contrib-jshint": "~1.1.0",
     "grunt-sass": "~2.0.0",
-    "grunt-contrib-uglify": "~2.0.0",
+    "grunt-contrib-uglify": "~2.3.0",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-mocha": "~1.0.2",
     "jit-grunt": "~0.10.0",
     "time-grunt": "~1.4.0",
     "grunt-jscs": "~3.0.1",
     "chai": "~3.5.0",
-    "mocha": "~3.2.0"
+    "mocha": "~3.3.0"
   },
   "engines": {
     "node": ">=0.12.0"
