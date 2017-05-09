@@ -1,4 +1,4 @@
-# iptools-jquery-offcanvas [![Build Status](https://api.travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas) [![npm version](https://badge.fury.io/js/iptools-jquery-offcanvas.svg)](https://badge.fury.io/js/iptools-jquery-offcanvas)[![Bower version](https://badge.fury.io/bo/iptools-jquery-offcanvas.svg)](http://badge.fury.io/bo/iptools-jquery-offcanvas)
+# iptools-jquery-offcanvas [![Build Status](https://api.travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-offcanvas) [![npm version](https://badge.fury.io/js/iptools-jquery-offcanvas.svg)](https://badge.fury.io/js/iptools-jquery-offcanvas) [![Bower version](https://badge.fury.io/bo/iptools-jquery-offcanvas.svg)](http://badge.fury.io/bo/iptools-jquery-offcanvas)
 
 Simple CSS3 animated offcanvas.
 
