@@ -123,6 +123,7 @@
     this.$toggle.off('.' + pluginName);
     this.$element
       .removeClass(this.settings.baseClass + modifiers.initialized)
+      .removeClass(this.settings.baseClass + types[this.settings.type].baseClass)
       .removeClass(this.settings.baseClass + types[this.settings.type].activeClass)
       .removeData('plugin_' + pluginName);
   };
