@@ -8,7 +8,7 @@ Simple CSS3 animated offcanvas.
 
 ## legacy
 
-- 0.0.2 [documentation](https://github.com/interactive-pioneers/iptools-jquery-offcanvas/tree/master/doc/0.0.2/readme.md)
+- 0.0.2 [documentation](https://github.com/interactive-pioneers/iptools-jquery-offcanvas/blob/master/doc/0.0.2/README.md)
 
 ## Features
 
