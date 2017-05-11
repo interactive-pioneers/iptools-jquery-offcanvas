@@ -29,4 +29,4 @@ Following tasks are there to help with development:
 - `npm run grunt watch` listens to source, runs full QA and live-reloads browser
 - `npm start` listens source, runs tests
 - `nmp test` runs full QA
-- `npm run grunt build` minify source to dist/
+- `npm run grunt build` minifies source to dist/
