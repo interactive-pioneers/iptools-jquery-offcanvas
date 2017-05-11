@@ -48,7 +48,9 @@
     "url": "https://github.com/interactive-pioneers/iptools-jquery-offcanvas.git"
   },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt travis --verbose",
+    "grunt": "grunt",
+    "start": "grunt watch:bdd"
   },
   "keywords": [
     "javascript",
