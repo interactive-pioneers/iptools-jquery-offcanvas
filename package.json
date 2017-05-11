@@ -58,6 +58,7 @@
     "*.md",
     "LICENSE",
     "src",
-    "dist"
+    "dist",
+    "doc"
   ]
 }
