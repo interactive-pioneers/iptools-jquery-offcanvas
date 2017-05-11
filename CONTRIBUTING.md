@@ -26,6 +26,7 @@ See [JavaScript coding conventions](http://conventions.interactive-pioneers.com/
 
 Following tasks are there to help with development:
 
-- `grunt watch` listens to source, live reloads browser
-- `grunt qa` run QA task that includes tests and JSHint
-- `grunt build` minify source to dist/
+- `npm run grunt watch` listens to source, runs full QA and live-reloads browser
+- `npm start` listens source, runs tests
+- `nmp test` runs full QA
+- `npm run grunt build` minifies source to dist/
