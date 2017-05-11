@@ -41,7 +41,7 @@
     "chai": "~3.5.0"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=6.2.0"
   },
   "repository": {
     "type": "git",
